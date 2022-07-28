@@ -24,3 +24,11 @@ setup-dev: .pip
 	pyenv local $(VENV_NAME)
 
 create-venv: .create-venv setup-dev
+
+
+containers-up: run-postgres
+
+containers-down:
+	docker stop $$(docker ps -aq)
+
+containers-reset: containers-down containers-up

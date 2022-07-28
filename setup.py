@@ -7,6 +7,10 @@ setup(name='Facebank',
       package_data={'': ['*.yaml']},
       version='1.0.0',
       install_requires=[
+          'Flask==2.1.3',
+          'Flask-Cors==3.0.10',
+          'SQLAlchemy==1.4.39',
+          'psycopg2==2.9.3',
       ],
       extras_require={
           'dev': [
