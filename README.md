@@ -1,14 +1,9 @@
-
-# Título do Projeto
-
-Uma breve descrição sobre o que esse projeto faz e para quem ele é
-
 # Facebank
 
 It's for study propose only.
 
 
-# Run requirements:
+## Run requirements:
 
 * Docker
 * Python 3.9
