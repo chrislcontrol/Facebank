@@ -16,7 +16,7 @@ It's for study propose only.
 * Make
 
 
-## Instalation
+## Installation
 
 Install with Make or see the raw commands in Makefile.
 
