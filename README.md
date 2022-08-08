@@ -1,3 +1,8 @@
+
+# Título do Projeto
+
+Uma breve descrição sobre o que esse projeto faz e para quem ele é
+
 # Facebank
 
 It's for study propose only.
@@ -11,7 +16,13 @@ It's for study propose only.
 * Make
 
 
-# Run project:
-1 - $ make containers-reset (This command will down all running docker containers and up project containers) \n
-2 - $ make run-app
+## Instalation
 
+Install with Make or see the raw commands in Makefile.
+
+```bash
+  make create-venv
+  make containers-reset (This command will down all running docker containers and up project containers) \n
+  make run-app
+```
+    
