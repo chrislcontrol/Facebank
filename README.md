@@ -12,6 +12,6 @@ It's for study propose only.
 
 
 # Run project:
-1 - $ make containers-reset (This command will down all running docker containers and up project containers)
+1 - $ make containers-reset (This command will down all running docker containers and up project containers) \n
 2 - $ make run-app
 
