@@ -17,7 +17,7 @@ Install with Make or see the raw commands in Makefile.
 
 ```bash
   make create-venv
-  make containers-reset (This command will down all running docker containers and up project containers) \n
+  make containers-reset
   make run-app
 ```
     
