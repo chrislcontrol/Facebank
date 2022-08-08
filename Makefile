@@ -28,6 +28,9 @@ create-venv: .create-venv setup-dev
 
 containers-up: run-postgres
 
+run-app:
+	python run.py
+
 containers-down:
 	docker stop $$(docker ps -aq)
 
