@@ -17,12 +17,12 @@ class APIError(Exception):
 
         return name
 
-    def __init__(self, message: str = DEFAULT_MESSAGE,
-                 status_code: int = DEFAULT_STATUS_CODE,
-                 code: str = DEFAULT_CODE,
+    def __init__(self, message: str = None,
+                 status_code: int = None,
+                 code: str = None,
                  raw: any = {}):
-        self.message = message if not raw else raw
-        self.status_code = status_code
+        self.message = message or self.DEFAULT_MESSAGE if not raw else raw
+        self.status_code = status_code or self.DEFAULT_STATUS_CODE
         self.code = code or self._code
         self.raw = raw
 
@@ -31,3 +31,13 @@ class APIError(Exception):
 
 class InvalidInput(APIError):
     DEFAULT_MESSAGE = "Invalid input."
+
+
+class ObjectNotFound(APIError):
+    DEFAULT_MESSAGE = "Object not found."
+    DEFAULT_STATUS_CODE = 404
+
+
+class ObjectAlreadyExists(APIError):
+    DEFAULT_MESSAGE = "Object already exists."
+    DEFAULT_STATUS_CODE = 409

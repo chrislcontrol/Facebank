@@ -24,25 +24,26 @@ class Serializer:
 
     def is_valid(self, raise_exception: bool = True) -> bool:
         errors = []
+        valid_data = [{}]
 
         for validation_key, validation_value in self.fields().items():
-            valid_data = {}
-            for data in self.__data:
+            for index, data in enumerate(self.__data):
                 input_value = data.get(validation_key)
 
                 success, message = validation_value.validate(input_value)
                 if success:
-                    valid_data[validation_key] = input_value
+                    valid_data[index][validation_key] = input_value
+
                 else:
                     errors.append(self._handle_fail(message=message,
                                                     field_name=validation_key,
                                                     base_field=validation_value))
 
-                self.__validated_data.append(valid_data)
+        self.__validated_data = valid_data
 
         if errors:
             if raise_exception:
-                raise InvalidInput(raw=errors, status_code=400, code="INVALID_INPUT")
+                raise InvalidInput(raw={"errors": list(set(errors))})
             return False
         self.__was_validated = True
 
@@ -50,7 +51,7 @@ class Serializer:
 
     def _handle_fail(self, message, field_name: str, base_field: BaseField) -> dict:
         def error(message):
-            return {"field": field_name, "error": message}
+            return {"field": field_name, "description": message}
 
         if message == FailReason.INVALID_TYPE:
             return error(f"Expected {base_field.type.__qualname__} type.")
