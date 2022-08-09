@@ -11,4 +11,4 @@ api_routes_bp = Blueprint("api_routes", __name__)
 def create_client_route():
     adapter = FlaskAdapter()
     response = adapter.adapt(request=request, api_route=register_client_composer())
-    return jsonify({}), response.status_code
+    return jsonify(response.body), response.status_code
