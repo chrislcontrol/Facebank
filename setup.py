@@ -11,6 +11,7 @@ setup(name='Facebank',
           'Flask-Cors==3.0.10',
           'SQLAlchemy==1.4.39',
           'psycopg2==2.9.3',
+          'bcrypt==3.2.2'
       ],
       extras_require={
           'dev': [
