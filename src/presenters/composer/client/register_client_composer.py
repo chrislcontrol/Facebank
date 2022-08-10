@@ -1,5 +1,5 @@
 from src.data.client.use_cases.register_client_use_case import RegisterClientUseCase
-from src.infra.helpers.encryptor import Encryptor
+from src.infra.adapters.encryptor import Encryptor
 from src.infra.repositories.client_repository import ClientRepository
 from src.presenters.controllers.client.register_client_controller import RegisterClientController
 

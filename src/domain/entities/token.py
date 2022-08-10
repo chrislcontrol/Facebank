@@ -4,7 +4,6 @@ from src.domain.helpers.entity import Entity
 
 
 @dataclass
-class Client(Entity):
-    username: str
-    email: str
-    password: str
+class Token(Entity):
+    token: str
+    client_id: str

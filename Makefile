@@ -35,3 +35,14 @@ containers-down:
 	docker stop $$(docker ps -aq)
 
 containers-reset: containers-down containers-up
+
+init-migrations:
+	-cd src/main/config && env FLASK_APP=app.py flask db init && cd ../../..
+
+create-migrations:
+	cd src/main/config && env FLASK_APP=app.py flask db migrate && cd ../../..
+
+run-migrations:
+	cd src/main/config && env FLASK_APP=app.py flask db upgrade && cd ../../..
+
+migrate: init-migrations create-migrations run-migrations

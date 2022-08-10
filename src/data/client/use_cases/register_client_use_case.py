@@ -1,5 +1,5 @@
 from src.data.client.exceptions import ClientAlreadyExists
-from src.data.interfaces.encryptor import IEncryptor
+from src.data.interfaces.encryptor_interface import IEncryptor
 from src.domain.entities.client import Client
 from src.infra.repositories.client_repository import ClientRepository
 from src.presenters.serializers.client.register_client_serializer import RegisterClientSerializer
