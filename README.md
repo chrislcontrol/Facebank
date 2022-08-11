@@ -17,6 +17,7 @@ Install with Make or see the raw commands in Makefile.
 
 ```bash
   make create-venv
+  make migrate
   make containers-reset
   make run-app
 ```
