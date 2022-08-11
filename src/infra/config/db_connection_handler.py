@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from src.main.environments.variables import DATABASE_URL
+from src.application.environments.variables import DATABASE_URL
 
 
 class DBConnectionHandler:

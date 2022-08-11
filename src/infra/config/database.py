@@ -9,9 +9,9 @@ from sqlalchemy.future import engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.sql import func
 
-from src.domain.helpers.entity import Entity
+from src.domain.types.entity import Entity
 from src.infra.config.db_connection_handler import DBConnectionHandler
-from src.infra.helpers.model_object import ModelObject
+from src.infra.repositories.object_values.model_object import ModelObject
 
 Base = declarative_base()
 db_session = scoped_session(sessionmaker(autocommit=False,

@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from src.domain.helpers.entity import Entity
+from src.domain.types.entity import Entity
 
 
 @dataclass

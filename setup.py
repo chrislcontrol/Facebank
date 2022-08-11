@@ -1,14 +1,15 @@
 from setuptools import setup, find_packages
 
-setup(name='Facebank',
-      description='Facebank',
-      long_description='Facebank',
+setup(name='User Storage',
+      description='User Storage',
+      long_description='User Storage',
       packages=find_packages(exclude=["*tests*"]),
       package_data={'': ['*.yaml']},
       version='1.0.0',
       install_requires=[
           'Flask==2.1.3',
           'Flask-Cors==3.0.10',
+          'Flask-Migrate==3.1.0',
           'SQLAlchemy==1.4.39',
           'psycopg2==2.9.3',
           'bcrypt==3.2.2'
