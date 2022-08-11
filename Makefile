@@ -1,13 +1,13 @@
 .DEFAULT_GOAL := default_target
 
-PROJECT_NAME := facebank
+PROJECT_NAME := user-storage
 PYTHON_VERSION := 3.9.0
 VENV_NAME := $(PROJECT_NAME)-$(PYTHON_VERSION)
 DATABASE_PASS := postgres
 
 
 run-postgres:
-	docker start $(PYTHON_VERSION)-postgres 2>/dev/null || docker run --name $(PYTHON_VERSION)-postgres -p 5432:5432 -e POSTGRES_PASSWORD='$(DATABASE_PASS)' -d postgres:10-alpine
+	docker start $(PROJECT_NAME)-postgres 2>/dev/null || docker run --name $(PROJECT_NAME)-postgres -p 5432:5432 -e POSTGRES_PASSWORD='$(DATABASE_PASS)' -d postgres:10-alpine
 
 .pip:
 	pip install pip --upgrade
@@ -35,3 +35,14 @@ containers-down:
 	docker stop $$(docker ps -aq)
 
 containers-reset: containers-down containers-up
+
+init-migrations:
+	-cd src/application && env FLASK_APP=app.py flask db init && cd ..
+
+create-migrations:
+	cd src/application && env FLASK_APP=app.py flask db migrate && cd ..
+
+run-migrations:
+	cd src/application && env FLASK_APP=app.py flask db upgrade && cd ..
+
+migrate: init-migrations create-migrations run-migrations
