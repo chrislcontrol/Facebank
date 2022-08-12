@@ -1,20 +1,16 @@
-class HttpRequest:
-    def __init__(self, headers: dict = {}, body: dict = {}, params: dict = {}):
-        self._headers = headers
-        self._body = body
-        self._params = params
+from dataclasses import dataclass, field
 
-    @property
-    def headers(self) -> dict:
-        return self._headers
+from src.domain.entities.client import Client
+from src.domain.types.typed_class import TypedClass
+from src.presentation.objects.headers import Headers
 
-    @property
-    def body(self) -> dict:
-        return self._body
 
-    @property
-    def params(self) -> dict:
-        return self._params
+@dataclass(frozen=True)
+class HttpRequest(TypedClass):
+    headers: Headers
+    body: dict = field(default_factory=dict)
+    params: dict = field(default_factory=dict)
+    client: Client = None
 
     def __repr__(self):
         return (

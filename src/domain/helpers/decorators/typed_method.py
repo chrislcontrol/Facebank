@@ -1,10 +1,10 @@
-from typing import Callable, Any, List
+from typing import Callable, Any, List, Tuple
 
 from src.domain.exceptions.invalid_input import InvalidInput
 from src.domain.types.value_object import ValueObject
 
 
-def validate_annotations(annotations: dict, *args, **kwargs) -> List[dict]:
+def validate_annotations(annotations: dict, *args, **kwargs) -> Tuple[Tuple, dict]:
     if args:
         raise TypeError('Positional arguments not allowed.')
 
@@ -27,12 +27,14 @@ def validate_annotations(annotations: dict, *args, **kwargs) -> List[dict]:
     if wrong_fields:
         raise TypeError(wrong_fields)
 
+    return args, kwargs
+
 
 def typed_method(func) -> Callable:
     annotations = func.__annotations__
 
     def return_func(*args, **kwargs):
-        validate_annotations(annotations=annotations, *args, **kwargs)
-        return func(**kwargs)
+        _, new_kwargs = validate_annotations(annotations=annotations, *args, **kwargs)
+        return func(**new_kwargs)
 
     return return_func

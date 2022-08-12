@@ -1,4 +1,4 @@
-from src.domain.decorators.typed_method import typed_method, validate_annotations
+from src.domain.helpers.decorators.typed_method import typed_method, validate_annotations
 
 
 class TypedClass:

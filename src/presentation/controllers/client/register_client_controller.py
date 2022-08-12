@@ -2,10 +2,13 @@ from src.domain.use_cases.client.register_client_use_case import RegisterClientU
 from src.presentation.controllers.interface.controller import Controller
 from src.presentation.helpers.http_request import HttpRequest
 from src.presentation.helpers.http_response import HttpResponse
+from src.presentation.security.authorization_classes.app_authentication import AppAuthentication
 from src.presentation.serializers.client.register_client_serializer import RegisterClientSerializer
 
 
 class RegisterClientController(Controller):
+    authentication_classes = [AppAuthentication]
+
     def __init__(self, register_client_use_case: RegisterClientUseCase):
         self._register_client_use_case = register_client_use_case
 

@@ -1,7 +1,14 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.future import engine
+from sqlalchemy.orm import sessionmaker, declarative_base, scoped_session
 
 from src.application.environments.variables import DATABASE_URL
+
+Base = declarative_base()
+db_session = scoped_session(sessionmaker(autocommit=False,
+                                         autoflush=False,
+                                         bind=engine))
+Base.query = db_session.query_property()
 
 
 class DBConnectionHandler:
@@ -20,8 +27,6 @@ class DBConnectionHandler:
         return engine
 
     def __enter__(self):
-        from src.infra.config.database import Base
-
         engine = create_engine(self.__connection_string)
         Base.metadata.create_all(engine)
         session_maker = sessionmaker()
