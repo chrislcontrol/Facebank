@@ -1,4 +1,4 @@
-from src.presentation.controllers.interface.route import Controller
+from src.presentation.controllers.interface.controller import Controller
 from src.domain.use_cases.authenticate.authenticate_client_use_case import AuthenticateClientUseCase
 from src.presentation.helpers.http_request import HttpRequest
 from src.presentation.helpers.http_response import HttpResponse

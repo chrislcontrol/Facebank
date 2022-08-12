@@ -1,12 +1,9 @@
-from flask import jsonify, request
-from flask.views import MethodView
+from flask import request
 
-from src.infra.adapters.flask_adapter import FlaskAdapter
+from src.application.types.view import View
 from src.presentation.composer.auth.authenticate_client_composer import authenticate_client_composer
 
 
-class AuthenticateClientRoute(MethodView):
+class AuthenticateClientRoute(View):
     def post(self):
-        adapter = FlaskAdapter()
-        response = adapter.adapt(request=request, api_route=authenticate_client_composer())
-        return jsonify(response.body), response.status_code
+        return self.adapter.adapt(request=request, controller=authenticate_client_composer())
