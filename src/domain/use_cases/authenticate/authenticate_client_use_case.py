@@ -1,17 +1,16 @@
 from hmac import compare_digest
-from operator import itemgetter
 
-from src.domain.exceptions.client_not_found import ClientNotFound
-from src.domain.exceptions.invalid_password import InvalidPassword
-from src.domain.repositories.client_repository import ClientRepository
-from src.domain.helpers.encryptor import IEncryptor
-from src.domain.repositories.token_repository import TokenRepository
 from src.domain.entities.client import Client
 from src.domain.entities.token import Token
-from src.presentation.serializers.authenticate.authenticate_client_serializer import AuthenticateClientSerializer
+from src.domain.exceptions.client_not_found import ClientNotFound
+from src.domain.exceptions.invalid_password import InvalidPassword
+from src.domain.helpers.encryptor import IEncryptor
+from src.domain.repositories.client_repository import ClientRepository
+from src.domain.repositories.token_repository import TokenRepository
+from src.domain.types.use_case import UseCase
 
 
-class AuthenticateClientUseCase:
+class AuthenticateClientUseCase(UseCase):
     def __init__(self, token_repository: TokenRepository,
                  client_repository: ClientRepository,
                  encryptor: IEncryptor):

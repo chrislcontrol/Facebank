@@ -1,5 +1,5 @@
 from src.domain.use_cases.client.register_client_use_case import RegisterClientUseCase
-from src.presentation.controllers.interface.route import Controller
+from src.presentation.controllers.interface.controller import Controller
 from src.presentation.helpers.http_request import HttpRequest
 from src.presentation.helpers.http_response import HttpResponse
 from src.presentation.serializers.client.register_client_serializer import RegisterClientSerializer
