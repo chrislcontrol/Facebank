@@ -1,15 +1,21 @@
-from typing import List
+from typing import List, Optional, Type
 
+from src.domain.types.entity import Entity
 from src.infra.repositories.object_values.model_object import ModelObject
+from src.utils.objects import serialize_object
 
 
 class Repository:
-    entity = ModelObject
+    entity = None
 
-    def convert(self, obj: object) -> entity:
+    def convert(self, obj: ModelObject, entity: Type[Entity] = None) -> Optional[entity]:
+        if not self.entity:
+            raise NotImplementedError("Must implement entity.")
+
         if not obj:
             return None
-        return self.entity(**{key: value for key, value in vars(obj).items() if not key.startswith('_')})
+        entity = entity or self.entity
+        return entity(**serialize_object(obj))  # noqa
 
-    def convert_list(self, obj_list: List[object]) -> List[entity]:
+    def convert_list(self, obj_list: List[ModelObject]) -> List[entity]:
         return list(map(lambda item: self.convert(item), obj_list))

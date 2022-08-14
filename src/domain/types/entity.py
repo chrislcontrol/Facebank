@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from datetime import datetime, date
 
 
-@dataclass
+@dataclass(frozen=True)
 class Entity:
     id: str
     created: datetime

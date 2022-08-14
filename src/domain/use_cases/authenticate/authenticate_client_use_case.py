@@ -22,7 +22,9 @@ class AuthenticateClientUseCase(UseCase):
         client = self._get_client(username=username)
         self.validate_password(client=client, password=password)
 
-        return self._token_repository.get_or_create(client=client)
+        _, token = self._token_repository.get_or_create(client=client)
+
+        return token
 
     def _get_client(self, username: str) -> Client:
         client = self._client_repository.get_by_username(username=username)

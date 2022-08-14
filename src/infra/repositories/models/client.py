@@ -1,13 +1,11 @@
 from sqlalchemy import Column, String
 
-from src.domain.entities.client import Client
-from src.infra.config.database import DatabaseModel
 from src.application.extensions import db
+from src.infra.database.database_model import DatabaseModel
 
 
 class ClientDB(db.Model, DatabaseModel):
     __tablename__ = "CLIENT"
-    __entity__ = Client
 
     username = Column(String, nullable=False, unique=True)
     password = Column(String, nullable=False)

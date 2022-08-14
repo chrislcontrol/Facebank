@@ -14,7 +14,7 @@ class PostgresClientRepository(ClientRepository, Repository):
             raise ClientAlreadyExists()
 
         client_db = ClientDB.create(username=username, password=password, email=email)
-        return client_db
+        return self.convert(client_db)
 
     def get_by_username(self, username: str) -> Client:
         query = ClientDB.query.filter_by(username=username).first()

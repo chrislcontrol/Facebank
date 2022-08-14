@@ -4,31 +4,31 @@ import uuid
 
 from sqlalchemy import Column, DateTime
 from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.future import engine
-from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql import func
 
 from src.domain.types.entity import Entity
-from src.infra.config.db_connection_handler import DBConnectionHandler
+from src.infra.database.db_connection_handler import DBConnectionHandler
 from src.infra.repositories.object_values.model_object import ModelObject
-
-Base = declarative_base()
-db_session = scoped_session(sessionmaker(autocommit=False,
-                                         autoflush=False,
-                                         bind=engine))
-Base.query = db_session.query_property()
+from src.utils.objects import serialize_object
 
 
 class DatabaseModel:
-    __entity__ = ModelObject
-
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
     created = Column(DateTime(timezone=True), server_default=func.now())
     modified = Column(DateTime(timezone=True), onupdate=func.now())
 
     @classmethod
-    def create(cls, **kwargs) -> __entity__:
+    def get(cls, **kwargs):
+        queryset = cls.query.filter_by(**kwargs)  # noqa
+        count = queryset.count()
+        if count > 1:
+            raise IntegrityError(f'Expected 1 result bot got {count}.')
+
+        return queryset.first()
+
+    @classmethod
+    def create(cls, **kwargs) -> ModelObject:
         valid_kwargs = {}
         for key, value in kwargs.items():
             if isinstance(value, (ModelObject, Entity)):
@@ -39,23 +39,18 @@ class DatabaseModel:
         new_object = cls(**valid_kwargs)
         return cls.__save_object(new_object)
 
+    def __str__(self):
+        return f"< {self.__class__.__name__}[{self.id}] >"
+
     @classmethod
-    def __save_object(cls, obj: object) -> __entity__:
+    def __save_object(cls, obj: object) -> ModelObject:
         with DBConnectionHandler() as db_connection:
             try:
                 db_connection.session.add(obj)
-                model_object = cls.__entity__(
-                    id=None,
-                    created=None,
-                    modified=None,
-                    **{key: value for key, value in vars(obj).items() if not key.startswith('_')}
-                )
                 db_connection.session.commit()
-                model_object.id = obj.id
-                model_object.created = obj.created
-                model_object.modified = obj.modified
+                obj.id  # noqa
 
-                return model_object
+                return ModelObject(**serialize_object(obj))
             except Exception:
                 db_connection.session.rollback()
                 raise
