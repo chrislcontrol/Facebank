@@ -2,14 +2,14 @@ from operator import itemgetter
 from typing import Union, Type
 
 from src.domain.entities.client import Client
-from src.presentation.composer.auth.factories import make_validate_token_use_case
-from src.presentation.controllers.interface.controller import Controller
+from src.presentation.composer.auth.validate_token_use_case_composer import validate_token_use_case_composer
+from src.presentation.controllers.base.controller import Controller
 from src.presentation.helpers.http_request import HttpRequest
 from src.presentation.security.helpers.base_authentication import BaseAuthentication
 
 
 class AppAuthentication(BaseAuthentication):
-    validate_token_use_case = make_validate_token_use_case()
+    validate_token_use_case = validate_token_use_case_composer()
 
     def authenticate(self, http_request: HttpRequest, controller: Controller) -> Union[Client, bool, Type[None]]:
         authorization = http_request.headers.authorization

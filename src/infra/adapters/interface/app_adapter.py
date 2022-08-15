@@ -1,7 +1,7 @@
 from abc import ABC
 from typing import Any
 
-from src.presentation.controllers.interface.controller import Controller
+from src.presentation.controllers.base.controller import Controller
 
 
 class AppAdapter(ABC):

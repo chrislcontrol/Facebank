@@ -1,5 +1,5 @@
 from src.domain.use_cases.client.register_client_use_case import RegisterClientUseCase
-from src.presentation.controllers.interface.controller import Controller
+from src.presentation.controllers.base.controller import Controller
 from src.presentation.helpers.http_request import HttpRequest
 from src.presentation.helpers.http_response import HttpResponse
 from src.presentation.security.authorization_classes.app_authentication import AppAuthentication
