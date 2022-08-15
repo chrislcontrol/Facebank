@@ -1,6 +1,6 @@
 from src.domain.repositories.token_repository import TokenRepository
 from src.domain.use_cases.authenticate.validate_token_use_case import ValidateTokenUseCase
-from src.infra.repositories.postgres.postgres_token_repository import PostgresTokenRepository
+from src.infra.repositories.sql_alchemy.postgres.postgres_token_repository import PostgresTokenRepository
 
 
 def make_postgres_token_repository() -> TokenRepository:

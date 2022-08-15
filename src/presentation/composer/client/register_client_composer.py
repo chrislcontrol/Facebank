@@ -1,6 +1,6 @@
 from src.domain.use_cases.client.register_client_use_case import RegisterClientUseCase
 from src.infra.adapters.bcrypt_adapter import BcryptAdapter
-from src.infra.repositories.postgres.postgres_client_repository import PostgresClientRepository
+from src.infra.repositories.sql_alchemy.postgres.postgres_client_repository import PostgresClientRepository
 from src.presentation.controllers.client.register_client_controller import RegisterClientController
 
 

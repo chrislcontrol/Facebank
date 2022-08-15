@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
 from src.domain.entities.client import Client
-from src.domain.types.typed_class import TypedClass
+from src.domain.helpers.typed_class import TypedClass
 from src.presentation.objects.headers import Headers
 
 
