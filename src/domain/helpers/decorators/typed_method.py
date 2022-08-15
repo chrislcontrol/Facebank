@@ -1,8 +1,5 @@
-from abc import ABC
-from typing import Callable, Any, List, Tuple
+from typing import Callable, Any, Tuple
 
-from src.domain.exceptions.invalid_input import InvalidInput
-from src.domain.types.entity import Entity
 from src.domain.types.value_object import ValueObject
 from src.infra.database.database_model import DatabaseModel
 

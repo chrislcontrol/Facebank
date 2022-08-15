@@ -1,9 +1,7 @@
 from abc import ABC
-from dataclasses import dataclass
 from datetime import datetime, date
 
 
-@dataclass(frozen=True)
 class Entity(ABC):
     id: str
     created: datetime

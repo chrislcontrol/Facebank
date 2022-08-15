@@ -1,12 +1,23 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from datetime import datetime
 
 
 class DatabaseModel:
     @property
     @abstractmethod
     def id(self) -> str:
+        raise NotImplementedError()
+
+    @property
+    @abstractmethod
+    def created(self) -> datetime:
+        raise NotImplementedError()
+
+    @property
+    @abstractmethod
+    def modified(self) -> datetime:
         raise NotImplementedError()
 
     def __str__(self):

@@ -10,6 +10,6 @@ class TypedClass:
         return typed_method(attr)
 
     def __new__(cls, *args, **kwargs):
-        validate_annotations(annotations=cls.__init__.__annotations__, *args, **kwargs)
+        validate_annotations(annotations=cls.__init__.__annotations__.copy(), *args, **kwargs)
 
         return super().__new__(cls)

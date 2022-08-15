@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from src.domain.exceptions.invalid_credentials import InvalidCredentials
 from src.domain.exceptions.not_authenticated import AuthenticationNotProvided
 from src.infra.database.database_model import DatabaseModel
+from src.infra.repositories.base.repository import Repository
 from src.presentation.helpers.http_request import HttpRequest
 from src.presentation.helpers.http_response import HttpResponse
 from src.utils.objects import serialize_object
@@ -43,11 +44,6 @@ class Controller(ABC):
             new_http_request = HttpRequest(**serialized)
             kwargs['http_request'] = new_http_request
 
-        def kill_instances():
-            attrs = [getattr(self, item) for item in vars(self).keys()]
-            for attr in attrs:
-                del attr
-
         def lambda_func(*args, **kwargs):
             http_request: HttpRequest = kwargs['http_request']
 
@@ -55,8 +51,6 @@ class Controller(ABC):
                 run_authentications(http_request=http_request, kwargs=kwargs)
 
             response = method(*args, **kwargs)
-
-            kill_instances()
 
             return response
 

@@ -3,7 +3,6 @@ from src.domain.exceptions.client_already_exists import ClientAlreadyExists
 from src.domain.helpers.encryptor import IEncryptor
 from src.domain.repositories.client_repository import ClientRepository
 from src.domain.types.use_case import UseCase
-from src.infra.repositories.sql_alchemy.postgres.postgres_client_repository import PostgresClientRepository
 
 
 class RegisterClientUseCase(UseCase):

@@ -1,9 +1,9 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_migrate import Migrate
-from src.application.environments.variables import DATABASE_URL
 from src.application.models import models  # noqa
 from src.application.urls import url_pattern
+from src.infra.environments.variables import DATABASE_URL
 
 
 def create_app():
