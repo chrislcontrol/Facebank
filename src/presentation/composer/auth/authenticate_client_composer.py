@@ -1,7 +1,7 @@
 from src.domain.use_cases.authenticate.authenticate_client_use_case import AuthenticateClientUseCase
 from src.infra.adapters.bcrypt_adapter import BcryptAdapter
-from src.infra.repositories.postgres.postgres_client_repository import PostgresClientRepository
-from src.infra.repositories.postgres.postgres_token_repository import PostgresTokenRepository
+from src.infra.repositories.sql_alchemy.postgres.postgres_client_repository import PostgresClientRepository
+from src.infra.repositories.sql_alchemy.postgres.postgres_token_repository import PostgresTokenRepository
 from src.presentation.controllers.authenticate.authenticate_client_controller import AuthenticateClientController
 
 

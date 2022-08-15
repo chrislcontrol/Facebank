@@ -1,7 +1,10 @@
+from abc import ABC
 from typing import Callable, Any, List, Tuple
 
 from src.domain.exceptions.invalid_input import InvalidInput
+from src.domain.types.entity import Entity
 from src.domain.types.value_object import ValueObject
+from src.infra.database.database_model import DatabaseModel
 
 
 def validate_annotations(annotations: dict, *args, **kwargs) -> Tuple[Tuple, dict]:
@@ -15,14 +18,15 @@ def validate_annotations(annotations: dict, *args, **kwargs) -> Tuple[Tuple, dic
         if not expected_type:
             raise TypeError(f"Parameter {arg} missing typing annotation.")
 
-        if isinstance(value, ValueObject):
-            kwargs[arg] = value.validate()
+        if not isinstance(value, DatabaseModel):
+            if isinstance(value, ValueObject):
+                kwargs[arg] = value.validate()
 
-        elif expected_type != Any:
-            if not isinstance(value, expected_type):
-                wrong_fields.append({"field": arg, "description": f"Expected {expected_type.__qualname__.upper()} "
-                                                                  f"but {value.__class__.__name__.upper()} "
-                                                                  f"was provided."})
+            elif expected_type != Any:
+                if not isinstance(value, expected_type):
+                    wrong_fields.append({"field": arg, "description": f"Expected {expected_type.__qualname__.upper()} "
+                                                                      f"but {value.__class__.__name__.upper()} "
+                                                                      f"was provided."})
 
     if wrong_fields:
         raise TypeError(wrong_fields)

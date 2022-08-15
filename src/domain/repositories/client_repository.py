@@ -11,3 +11,7 @@ class ClientRepository(ABC):
     @abstractmethod
     def get_by_username(self, username: str) -> Client:
         raise NotImplementedError()
+
+    @abstractmethod
+    def already_exists(self, username: str) -> bool:
+        raise NotImplementedError()
