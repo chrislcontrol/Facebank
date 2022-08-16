@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from enum import Enum
 
+from src.presentation.base.schema.base_field_protocol import BaseFieldProtocol
+
 
 class SuccessMessage(Enum):
     SUCCESS = 'SUCCESS'
@@ -15,13 +17,13 @@ class FailReason(Enum):
 
 
 @dataclass
-class BaseField:
+class BaseField(BaseFieldProtocol):
     type: type
     min_lenght: int = None
     max_length: int = None
     required: bool = True
 
-    def validate(self, value: any) -> (bool, Enum):
+    def validate(self, value: any) -> (bool, FailReason):
         if self.__is_null_or_blank(value) and self.required:
             return self._fail(FailReason.REQUIRED_FIELD)
 

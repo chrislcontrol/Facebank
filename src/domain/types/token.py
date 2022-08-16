@@ -8,7 +8,10 @@ from src.domain.types.value_object import ValueObject
 class AuthorizationToken(ValueObject):
     value: str
 
-    def validate(self) -> Optional[str]:
+    def validate(self) -> str:
+        if not self.value:
+            return ""
+
         if not self.value.startswith('Token '):
-            return None
+            return ""
         return self.value

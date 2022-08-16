@@ -1,4 +1,4 @@
-from src.presentation.serializers.types.base_field import BaseField
+from src.presentation.base.schema.base_field import BaseField
 
 
 class CharField(BaseField):

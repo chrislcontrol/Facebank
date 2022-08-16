@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import uuid
+from datetime import date, datetime
 
 from sqlalchemy import Column, DateTime
 from sqlalchemy.dialects.postgresql import UUID
@@ -16,3 +17,14 @@ class SQLAlchemyDatabaseModel(DatabaseModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+    def to_dict(self) -> dict:
+        new_dict = {}
+        for key, value in vars(self).copy().items():
+            if not key.startswith('_'):
+                if isinstance(value, (date, datetime)):
+                    value = value.isoformat()
+
+                new_dict[key] = value
+
+        return new_dict

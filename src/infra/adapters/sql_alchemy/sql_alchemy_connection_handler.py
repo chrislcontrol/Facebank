@@ -17,7 +17,8 @@ class SQLAlchemyConnectionHandler(DBConnectionHandler):
         self._session.close()
 
     def add(self, obj: Entity) -> Entity:
-        return self._session.add(obj)
+        local_obj = self._session.merge(obj)
+        return self._session.add(local_obj)
 
     def commit(self) -> None:
         return self._session.commit()

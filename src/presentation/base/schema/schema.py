@@ -1,10 +1,10 @@
 from typing import Dict
 
 from src.domain.exceptions.invalid_input import InvalidInput
-from src.presentation.serializers.types.base_field import BaseField, FailReason
+from src.presentation.base.schema.base_field import BaseField, FailReason
 
 
-class Serializer:
+class Schema:
     def __init__(self, data: dict or list, many: bool = False):
         self.__data = data if many else [data]
         self.__many = many

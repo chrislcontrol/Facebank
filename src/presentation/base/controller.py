@@ -3,7 +3,6 @@ from abc import ABC, abstractmethod
 from src.domain.exceptions.invalid_credentials import InvalidCredentials
 from src.domain.exceptions.not_authenticated import AuthenticationNotProvided
 from src.infra.database.database_model import DatabaseModel
-from src.infra.repositories.base.repository import Repository
 from src.presentation.helpers.http_request import HttpRequest
 from src.presentation.helpers.http_response import HttpResponse
 from src.utils.objects import serialize_object
