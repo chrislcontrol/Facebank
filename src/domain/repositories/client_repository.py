@@ -2,17 +2,11 @@ from abc import abstractmethod, ABC
 from typing import Type
 
 from src.domain.entities.client import Client
-from src.infra.repositories.base.repository import Repository
 
 
-class ClientRepository(Repository):
-    @property
+class ClientRepository(ABC):
     @abstractmethod
-    def entity(self) -> Type[Client]:
-        raise NotImplementedError()
-
-    @abstractmethod
-    def create_client(self, **kwargs) -> Client:
+    def create_client(self, *, username: str, password: bytes, email: str) -> Client:
         raise NotImplementedError()
 
     @abstractmethod

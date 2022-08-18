@@ -4,7 +4,7 @@ from src.domain.entities.client import Client
 from src.domain.entities.token import Token
 from src.domain.exceptions.client_not_found import ClientNotFound
 from src.domain.exceptions.invalid_password import InvalidPassword
-from src.domain.helpers.encryptor import IEncryptor
+from src.domain.helpers.encryptor import Encryptor
 from src.domain.repositories.client_repository import ClientRepository
 from src.domain.repositories.token_repository import TokenRepository
 from src.domain.types.use_case import UseCase
@@ -13,7 +13,7 @@ from src.domain.types.use_case import UseCase
 class AuthenticateClientUseCase(UseCase):
     def __init__(self, token_repository: TokenRepository,
                  client_repository: ClientRepository,
-                 encryptor: IEncryptor):
+                 encryptor: Encryptor):
         self._token_repository = token_repository
         self._client_repository = client_repository
         self._encryptor = encryptor
@@ -35,7 +35,7 @@ class AuthenticateClientUseCase(UseCase):
 
     def validate_password(self, *, client: Client, password: str) -> bool:
         client_password = client.password.encode()
-        hashed_password = self._encryptor.encrypt(password, client_password)
+        hashed_password = self._encryptor.encrypt_password(password, client_password)
 
         if not compare_digest(hashed_password, client_password):
             raise InvalidPassword()

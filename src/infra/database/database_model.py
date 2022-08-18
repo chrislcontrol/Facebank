@@ -5,6 +5,10 @@ from datetime import datetime
 
 
 class DatabaseModel:
+    @abstractmethod
+    def to_dict(self) -> dict:
+        raise NotImplementedError()
+
     @property
     @abstractmethod
     def id(self) -> str:

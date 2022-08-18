@@ -8,7 +8,14 @@ from src.domain.types.value_object import ValueObject
 class AuthorizationToken(ValueObject):
     value: str
 
-    def validate(self) -> Optional[str]:
+    def validate(self) -> str:
+        if not self.value:
+            return ""
+
         if not self.value.startswith('Token '):
-            return None
+            return ""
         return self.value
+
+    def without_prefix(self, validate: bool = True) -> str:
+        value = self.validate() if validate else self.value
+        return value.split('Token ')[-1]

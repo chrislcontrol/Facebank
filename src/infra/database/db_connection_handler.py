@@ -1,11 +1,13 @@
 from abc import ABC, abstractmethod
-from typing import List
+from typing import Type
 
 from src.domain.types.entity import Entity
-from src.infra.repositories.objects.queryset import QuerySet
+from src.infra.base_classes.queryset import QuerySet
 
 
-class DBConnectionHandler(ABC):
+class DBHandler:
+    model: Type[Entity]
+
     @abstractmethod
     def close_pool_session(self) -> None:
         raise NotImplementedError()
@@ -34,5 +36,14 @@ class DBConnectionHandler(ABC):
     def get(self, **params) -> Entity:
         raise NotImplementedError()
 
-    def __del__(self):
-        self.close_pool_session()
+
+class DBConnectionHandler(ABC):
+    model: Type[Entity]
+
+    @abstractmethod
+    def __enter__(self) -> DBHandler:
+        raise NotImplementedError()
+
+    @abstractmethod
+    def __exit__(self, *args, **kwargs) -> None:
+        raise NotImplementedError()
