@@ -1,5 +1,6 @@
 from abc import ABC
-from datetime import datetime, date
+from dataclasses import dataclass
+from datetime import datetime
 
 
 class Entity(ABC):

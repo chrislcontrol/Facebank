@@ -15,3 +15,7 @@ class AuthorizationToken(ValueObject):
         if not self.value.startswith('Token '):
             return ""
         return self.value
+
+    def without_prefix(self, validate: bool = True) -> str:
+        value = self.validate() if validate else self.value
+        return value.split('Token ')[-1]

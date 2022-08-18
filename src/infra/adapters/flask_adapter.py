@@ -1,6 +1,6 @@
 from flask import Request, jsonify
 
-from src.infra.base.app_adapter import AppAdapter
+from src.infra.base_classes.app_adapter import AppAdapter
 from src.presentation.base.controller import Controller
 from src.presentation.helpers.exception_handler import ExceptionHandler
 from src.presentation.helpers.http_request import HttpRequest

@@ -5,9 +5,5 @@ from uuid import UUID
 
 class Encryptor(ABC):
     @abstractmethod
-    def encrypt(self, value: Union[str, UUID], hashed: bytes = None) -> bytes:
-        raise NotImplementedError()
-
-    @abstractmethod
-    def encrypt_password(self, value: Union[str, UUID]) -> bytes:
+    def encrypt_password(self, value: Union[str, UUID], salt: bytes = None) -> bytes:
         raise NotImplementedError()

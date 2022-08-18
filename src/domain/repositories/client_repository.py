@@ -5,11 +5,6 @@ from src.domain.entities.client import Client
 
 
 class ClientRepository(ABC):
-    @property
-    @abstractmethod
-    def entity(self) -> Type[Client]:
-        raise NotImplementedError()
-
     @abstractmethod
     def create_client(self, *, username: str, password: bytes, email: str) -> Client:
         raise NotImplementedError()

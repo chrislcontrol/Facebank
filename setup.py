@@ -9,7 +9,7 @@ setup(name='User Storage',
       install_requires=[
           'Flask==2.1.3',
           'Flask-Cors==3.0.10',
-          'Flask-Migrate==3.1.0',
+          'alembic==1.8.1',
           'SQLAlchemy==1.4.39',
           'psycopg2==2.9.3',
           'bcrypt==3.2.2'

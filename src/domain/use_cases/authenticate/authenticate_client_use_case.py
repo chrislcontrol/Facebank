@@ -35,7 +35,7 @@ class AuthenticateClientUseCase(UseCase):
 
     def validate_password(self, *, client: Client, password: str) -> bool:
         client_password = client.password.encode()
-        hashed_password = self._encryptor.encrypt(password, client_password)
+        hashed_password = self._encryptor.encrypt_password(password, client_password)
 
         if not compare_digest(hashed_password, client_password):
             raise InvalidPassword()

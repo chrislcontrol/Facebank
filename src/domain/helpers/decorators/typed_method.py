@@ -17,7 +17,7 @@ def validate_annotations(annotations: dict, *args, **kwargs) -> Tuple[Tuple, dic
 
         if not isinstance(value, DatabaseModel):
             if isinstance(value, ValueObject):
-                kwargs[arg] = value.validate()
+                kwargs[arg] = value
 
             elif expected_type != Any:
                 if not isinstance(value, expected_type):
