@@ -18,8 +18,8 @@ Install with Make or see the raw commands in Makefile.
 ```bash
   make create-venv (Only for pyenv users. Otherwise you can create a virtual env somehow.)
   make setup-dev (For NOT pyenv users.)
-  make migrate
-  make containers-reset
+  make containers-up
+  make alembic-upgrade-head
   make run-app
 ```
     
