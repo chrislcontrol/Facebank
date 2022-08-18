@@ -36,13 +36,20 @@ containers-down:
 
 containers-reset: containers-down containers-up
 
-init-migrations:
-	-cd src/application && env FLASK_APP=app.py flask db init && cd ..
+alembic-revision:
+	alembic revision --autogenerate -m "auto"
 
-create-migrations:
-	cd src/application && env FLASK_APP=app.py flask db migrate && cd ..
+alembic-upgrade-head:
+	alembic upgrade head
 
-run-migrations:
-	cd src/application && env FLASK_APP=app.py flask db upgrade && cd ..
+alembic-upgrade-one:
+	alembic upgrade +1
 
-migrate: init-migrations create-migrations run-migrations
+alembic-downgrade-one:
+	alembic downgrade -1
+
+alembic-downgrade-base:
+	alembic downgrade base
+
+alembic-history:
+	alembic history -i

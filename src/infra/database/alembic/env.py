@@ -1,12 +1,32 @@
+import uuid
 from logging.config import fileConfig
 
 from alembic import context
+from alembic.script import ScriptDirectory
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from src.infra.database.sql_alchemy.models import *
 from src.infra.database.sql_alchemy.config import Base
 from src.infra.environments.variables import DATABASE_URL
+
+
+def process_revision_directives(context, revision, directives):
+    # extract Migration
+    migration_script = directives[0]
+    # extract current head revision
+    head_revision = ScriptDirectory.from_config(context.config).get_current_head()
+
+    if head_revision is None:
+        # edge case with first migration
+        new_rev_id = 1
+    else:
+        # default branch with incrementation
+        last_rev_id = int(head_revision.lstrip('0'))
+        new_rev_id = last_rev_id + 1
+
+    migration_script.rev_id = f'{new_rev_id}_{migration_script.rev_id}'
+
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -56,6 +76,7 @@ def run_migrations_offline() -> None:
         compare_type=True,
         render_as_batch=True,
         dialect_opts={"paramstyle": "named"},
+        process_revision_directives=process_revision_directives,
     )
 
     with context.begin_transaction():
@@ -81,6 +102,7 @@ def run_migrations_online() -> None:
             target_metadata=target_metadata,
             compare_type=True,
             render_as_batch=True,
+            process_revision_directives=process_revision_directives,
         )
 
         with context.begin_transaction():
