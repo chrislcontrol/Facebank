@@ -21,9 +21,12 @@ class SQLAlchemyDatabaseModel(DatabaseModel):
     def to_dict(self) -> dict:
         new_dict = {}
         for key, value in vars(self).copy().items():
-            if not key.startswith('_'):
+            if not key.startswith('_') and not isinstance(value, DatabaseModel):
                 if isinstance(value, (date, datetime)):
                     value = value.isoformat()
+
+                elif isinstance(value, bytes):
+                    value = value.decode('utf-8')
 
                 new_dict[key] = value
 

@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from src.domain.exceptions.invalid_credentials import InvalidCredentials
 from src.domain.exceptions.not_authenticated import AuthenticationNotProvided
 from src.infra.database.database_model import DatabaseModel
+from src.infra.database.db_connection_handler import DBHandler
 from src.presentation.helpers.http_request import HttpRequest
 from src.presentation.helpers.http_response import HttpResponse
 from src.utils.objects import serialize_object
@@ -26,7 +27,7 @@ class Controller(ABC):
         def run_authentications(http_request: HttpRequest, kwargs: dict):
             results = []
             for authentication in self.authentication_classes:
-                auth_class = authentication()
+                auth_class = authentication(db=http_request.db)
                 result = auth_class.authenticate(http_request, self)
                 results.append(result)
 

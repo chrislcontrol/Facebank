@@ -8,8 +8,7 @@ from src.infra.database.sql_alchemy.models.user import UserDB
 
 
 class PostgresUserRepository(UserRepository, Repository):
-    def __init__(self, model: Entity = UserDB):
-        super().__init__(model=model)
+    entity: Entity = UserDB
 
     def create_user(self, *, name: str, username: str, password: bytes, client: Client, attributes: dict) -> User:
         return self._create(name=name, username=username, password=password, client=client, attributes=attributes)
