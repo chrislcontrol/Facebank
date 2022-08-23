@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from enum import Enum
+from typing import Any
 
 from src.presentation.base.schema.base_field_protocol import BaseFieldProtocol
 
@@ -19,9 +20,19 @@ class FailReason(Enum):
 @dataclass
 class BaseField(BaseFieldProtocol):
     type: type
+    default: Any = None
     min_lenght: int = None
     max_length: int = None
     required: bool = True
+
+    def __post_init__(self):
+        if self.default in [{}, [], ()]:
+            raise ValueError(r'Default value should not be {}, [] or (). Might be dict, list or tuple instead.')
+
+        if self.default is not None and self.required is True:
+            self.required = False
+
+        self.default = {dict: {}, list: [], tuple: ()}.get(self.default, self.default)
 
     def validate(self, value: any) -> (bool, FailReason):
         if self.__is_null_or_blank(value) and self.required:
@@ -41,7 +52,7 @@ class BaseField(BaseFieldProtocol):
                 return self._fail(FailReason.MAX_LENGHT)
 
         except TypeError:
-            return self._fail(FailReason.UNKNOW)
+            pass
 
         return self._success()
 

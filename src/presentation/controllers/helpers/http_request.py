@@ -3,7 +3,7 @@ from dataclasses import dataclass, field
 from src.domain.entities.client import Client
 from src.domain.helpers.typed_class import TypedClass
 from src.infra.database.db_connection_handler import DBHandler
-from src.presentation.objects.headers import Headers
+from src.presentation.controllers.helpers.headers import Headers
 
 
 @dataclass(frozen=True)

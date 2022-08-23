@@ -1,5 +1,5 @@
 from src.domain.exceptions.api_error import APIError
-from src.presentation.helpers.http_response import HttpResponse
+from src.presentation.controllers.helpers.http_response import HttpResponse
 
 
 class ExceptionHandler:

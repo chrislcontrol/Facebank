@@ -5,7 +5,7 @@ from src.domain.entities.client import Client
 from src.infra.database.db_connection_handler import DBHandler
 from src.presentation.base.controller import Controller
 from src.presentation.composer.auth.validate_token_use_case_composer import validate_token_use_case_composer
-from src.presentation.helpers.http_request import HttpRequest
+from src.presentation.controllers.helpers.http_request import HttpRequest
 from src.presentation.security.helpers.base_authentication import BaseAuthentication
 
 

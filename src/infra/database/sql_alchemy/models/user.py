@@ -2,11 +2,12 @@ from sqlalchemy import Column, String, UniqueConstraint, ForeignKey
 from sqlalchemy.dialects.postgresql import UUID, JSONB
 from sqlalchemy.orm import backref, relationship
 
+from src.domain.types.entity import Entity
 from src.infra.database.sql_alchemy.config import Base
 from src.infra.database.sql_alchemy.sql_alchemy_database_model import SQLAlchemyDatabaseModel
 
 
-class UserDB(Base, SQLAlchemyDatabaseModel):
+class UserDB(Base, SQLAlchemyDatabaseModel, Entity):
     __tablename__ = "USER"
 
     client_id = Column("CLIENT_ID", UUID(as_uuid=True), ForeignKey('CLIENT.id'))
