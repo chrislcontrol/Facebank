@@ -1,13 +1,11 @@
 from src.domain.entities.client import Client
 from src.domain.repositories.client_repository import ClientRepository
-from src.domain.types.entity import Entity
 from src.infra.base_classes.repository import Repository
 from src.infra.database.sql_alchemy.models.client import ClientDB
 
 
 class PostgresClientRepository(ClientRepository, Repository):
-    def __init__(self, model: Entity = ClientDB):
-        super().__init__(model=model)
+    entity = ClientDB
 
     def create_client(self, *, username: str, password: bytes, email: str) -> Client:
         return self._create(username=username, password=password.decode('utf-8'), email=email)

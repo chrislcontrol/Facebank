@@ -15,5 +15,5 @@ class TokenRepository(ABC):
         raise NotImplementedError()
 
     @abstractmethod
-    def get_token_by_string_with_client(self, *, token: str) -> Tuple[Token, Client]:
+    def get_token_by_string(self, *, token: str) -> Token:
         raise NotImplementedError()

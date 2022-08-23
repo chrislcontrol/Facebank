@@ -13,11 +13,11 @@ class ValidateTokenUseCase(UseCase):
         self._token_repository = token_repository
 
     def validate(self, *, token_string: AuthorizationToken) -> Dict[str, Union[Token, Client, bool]]:
-        token, client = self._token_repository.get_token_by_string_with_client(token=token_string.without_prefix())
+        token = self._token_repository.get_token_by_string(token=token_string.without_prefix())
         if not token:
             raise InvalidCredentials()
         return {
             "token": token,
-            "client": client,
+            "client": token.client,
             "success": bool(token)
         }

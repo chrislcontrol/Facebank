@@ -1,2 +1,2 @@
 DATABASE_URL = "postgresql://postgres:postgres@localhost:5432/postgres"
-DEBUG_DB_OPENINGS = True
+DEBUG_DB = True

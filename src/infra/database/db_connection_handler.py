@@ -29,11 +29,11 @@ class DBHandler:
         raise NotImplementedError()
 
     @abstractmethod
-    def filter(self, **params) -> QuerySet[Entity]:
+    def filter(self, *, entity: Type[Entity], **params) -> QuerySet[Entity]:
         raise NotImplementedError()
 
     @abstractmethod
-    def get(self, **params) -> Entity:
+    def get(self, *, entity: Type[Entity], **params) -> Entity:
         raise NotImplementedError()
 
 
