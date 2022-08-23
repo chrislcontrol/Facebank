@@ -3,9 +3,9 @@ from flask import Request, jsonify
 from src.infra.base_classes.app_adapter import AppAdapter
 from src.infra.database.db_connection_handler import DBHandler
 from src.presentation.base.controller import Controller
-from src.presentation.helpers.exception_handler import ExceptionHandler
-from src.presentation.helpers.http_request import HttpRequest
-from src.presentation.objects.headers import Headers
+from src.presentation.controllers.helpers.exception_handler import ExceptionHandler
+from src.presentation.controllers.helpers.headers import Headers
+from src.presentation.controllers.helpers.http_request import HttpRequest
 
 
 class FlaskAdapter(AppAdapter):

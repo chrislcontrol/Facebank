@@ -1,7 +1,7 @@
 from src.infra.database.db_connection_handler import DBHandler
 from src.presentation.base.controller import Controller
-from src.presentation.helpers.http_request import HttpRequest
-from src.presentation.helpers.http_response import HttpResponse
+from src.presentation.controllers.helpers import HttpRequest
+from src.presentation.controllers.helpers import HttpResponse
 
 
 class IControllerComposer(Controller):

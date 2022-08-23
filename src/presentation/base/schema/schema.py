@@ -28,7 +28,10 @@ class Schema:
 
         for validation_key, validation_value in self.fields().items():
             for index, data in enumerate(self.__data):
-                input_value = data.get(validation_key)
+                if validation_key in data:
+                    input_value = data.get(validation_key)
+                else:
+                    input_value = validation_value.default
 
                 success, message = validation_value.validate(input_value)
                 if success:
@@ -43,7 +46,7 @@ class Schema:
 
         if errors:
             if raise_exception:
-                raise InvalidInput(raw={"errors": list(set(errors))})
+                raise InvalidInput(raw={"errors": errors})
             return False
         self.__was_validated = True
 

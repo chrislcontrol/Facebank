@@ -7,4 +7,4 @@ class CreateUserInputSchema(Schema):
     name = CharField(max_length=100)
     username = CharField(max_length=100)
     password = CharField(max_length=255)
-    attributes = JSONField()
+    attributes = JSONField(default=dict)
